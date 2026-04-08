@@ -1,0 +1,924 @@
+:root {
+    --bg-color: #0a0a0a;
+    --bg-elevated: #111111;
+    --text-primary: #f0ece4;
+    --text-secondary: #9a9590;
+    --accent-gold: #b8956a;
+    --accent-gold-light: #d4c5a9;
+    --accent-gold-dark: #8a6d4a;
+    --accent-champagne: #e8dcc8;
+    --font-heading: 'Playfair Display', 'Cormorant Garamond', serif;
+    --font-heading-alt: 'Cormorant Garamond', serif;
+    --font-body: 'Noto Sans JP', sans-serif;
+    --glass-bg: rgba(255, 255, 255, 0.025);
+    --glass-border: rgba(255, 255, 255, 0.04);
+    --section-padding: clamp(80px, 12vw, 140px);
+    --container-max: 1100px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* ============================================
+   STICKY NAVIGATION
+   ============================================ */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    background: transparent;
+}
+
+.site-nav.scrolled {
+    padding: 0.8rem 2rem;
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(184, 149, 106, 0.1);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-logo:hover {
+    opacity: 0.8;
+}
+
+.nav-logo-img {
+    height: 28px;
+    width: auto;
+    display: block;
+    /* 黒いロゴを暗い背景で際立たせるための光彩（ドロップシャドウ） */
+    filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8)) 
+            drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+.nav-links a {
+    font-family: var(--font-heading-alt);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-gold);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-links a:hover {
+    color: var(--accent-gold-light);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 680px) {
+    .nav-links {
+        gap: 1.2rem;
+    }
+    .nav-links a {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+    }
+    .site-nav {
+        padding: 1rem 1rem;
+    }
+    .nav-logo {
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    min-height: 100vh;
+    padding: 6rem 0 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: #000;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+    z-index: 0;
+    transition: background-image 0.5s ease-in-out;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(10,10,10,1) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.5s;
+}
+
+/* Hero Ornament */
+.hero-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.hero-ornament::before,
+.hero-ornament::after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+}
+
+.hero-ornament .ornament-diamond {
+    width: 6px;
+    height: 6px;
+    background: var(--accent-gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    letter-spacing: 0.08em;
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    line-height: 2;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: var(--text-secondary);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-family: var(--font-heading-alt);
+}
+
+.scroll-indicator::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent-gold), transparent);
+    margin: 12px auto 0;
+    animation: scrollDrip 2.5s ease-in-out infinite;
+    transform-origin: top;
+}
+
+/* ============================================
+   SECTION DIVIDER — Ornamental
+   ============================================ */
+.section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    gap: 1.5rem;
+    opacity: 0.4;
+}
+
+.section-divider::before,
+.section-divider::after {
+    content: '';
+    flex: 1;
+    max-width: 180px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold-dark), transparent);
+}
+
+.section-divider .divider-ornament {
+    width: 8px;
+    height: 8px;
+    border: 1px solid var(--accent-gold-dark);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
+/* ============================================
+   LAYOUT
+   ============================================ */
+.section {
+    padding: var(--section-padding) 0;
+}
+
+.container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+/* ============================================
+   SECTION TITLES — Editorial
+   ============================================ */
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--accent-gold);
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    position: relative;
+    padding-bottom: 1.5rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: var(--accent-gold);
+}
+
+.scene-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 2rem;
+    letter-spacing: 0.08em;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(184, 149, 106, 0.15);
+    display: block;
+    font-weight: 400;
+}
+
+/* ============================================
+   HERO IMAGE / KEY VISUAL
+   ============================================ */
+.section-hero-image {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 3.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    position: relative;
+}
+
+.section-hero-image::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(184, 149, 106, 0.08);
+    border-radius: 8px;
+    pointer-events: none;
+}
+
+.section-hero-image img.section-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-hero-image:hover img.section-photo {
+    transform: scale(1.02);
+}
+
+.section-hero-multi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+}
+
+.section-hero-multi img.section-photo {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-hero-multi img.section-photo:hover {
+    transform: scale(1.03);
+}
+
+/* ============================================
+   HERO GALLERY — Masonry-like
+   ============================================ */
+.hero-gallery {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+
+.hero-gallery-item:nth-child(1) {
+    grid-row: span 2;
+}
+
+.hero-gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    background: #111;
+}
+
+.hero-gallery-item:hover img {
+    transform: scale(1.02);
+}
+
+@media (max-width: 800px) {
+    .hero-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    .hero-gallery-item:nth-child(1) {
+        grid-row: auto;
+    }
+}
+
+/* ============================================
+   CONCEPT CONTENT
+   ============================================ */
+.concept-content {
+    text-align: center;
+    font-size: 1.15rem;
+    font-weight: 300;
+    max-width: 780px;
+    margin: 0 auto;
+    line-height: 2.4;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.concept-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 5rem;
+    flex-wrap: wrap;
+    background: var(--glass-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+}
+
+.concept-wrapper .concept-content {
+    margin: 0;
+    flex: 1;
+    min-width: 300px;
+    max-width: 100%;
+}
+
+.concept-wrapper .product-image {
+    flex: 0 0 400px;
+    max-width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    background: #111;
+}
+
+.product-image img,
+.product-image embed {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    max-height: 300px;
+}
+
+/* ============================================
+   EQUIPMENT SECTION — Subtle Frame
+   ============================================ */
+.equipment-section {
+    position: relative;
+}
+
+.equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+/* ============================================
+   COLOR / CATALOG GRID
+   ============================================ */
+.color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+
+.color-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    padding: 0.8rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+    text-align: center;
+}
+
+.color-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.color-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #111;
+    border-radius: 6px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+}
+
+.color-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+}
+
+.color-card:hover .color-image img {
+    transform: scale(1.04);
+}
+
+.color-card h4 {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-family: var(--font-heading-alt);
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   GLASS CARDS
+   ============================================ */
+.glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.glass-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.card-image {
+    width: 100%;
+    height: 200px;
+    background: #111;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    overflow: hidden;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover .card-image img {
+    transform: scale(1.03);
+}
+
+.card-content h3 {
+    font-family: var(--font-heading);
+    color: var(--accent-gold);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 400;
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* ============================================
+   VIDEO
+   ============================================ */
+.video-section {
+    background: linear-gradient(to bottom, var(--bg-color), #050505);
+}
+
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: #000;
+    border: 1px solid rgba(184, 149, 106, 0.06);
+}
+
+.video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ============================================
+   CTA SECTION
+   ============================================ */
+.cta-section {
+    text-align: center;
+    position: relative;
+    padding: 160px 0;
+    background: url('10-15206.JPG') center/cover no-repeat;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10,10,10,0.5); /* ぼかしを入れるため元の0.7から少し明るめに調整 */
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.cta-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-bottom: 2.5rem;
+}
+
+.cta-ornament::before,
+.cta-ornament::after {
+    content: '';
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold-light), transparent);
+}
+
+.cta-ornament .ornament-diamond {
+    width: 5px;
+    height: 5px;
+    background: var(--accent-gold-light);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+}
+
+.cta-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 3.5rem;
+    line-height: 1.8;
+    letter-spacing: 0.03em;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 1.1rem 3.5rem;
+    background: transparent;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: var(--font-heading-alt);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    z-index: -1;
+}
+
+.cta-button:hover {
+    color: var(--bg-color);
+    border-color: var(--accent-gold);
+}
+
+.cta-button:hover::before {
+    opacity: 1;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background: #000;
+    padding: 2.5rem 0;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(184, 149, 106, 0.08);
+    letter-spacing: 0.05em;
+}
+
+/* ============================================
+   LIGHTBOX MODAL
+   ============================================ */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+.lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 3rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 1001;
+    line-height: 1;
+}
+
+.lightbox-close:hover {
+    color: var(--accent-gold);
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    transform: scale(0.95);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox.active img {
+    transform: scale(1);
+}
+
+.lightbox-caption {
+    margin-top: 25px;
+    font-size: 1.1rem;
+    color: var(--accent-gold-light);
+    font-family: var(--font-heading);
+    letter-spacing: 0.12em;
+    font-weight: 400;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollDrip {
+    0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 0.6;
+    }
+    40% {
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+    }
+    40.1% {
+        transform: scaleY(1);
+        transform-origin: bottom;
+    }
+    80% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0.3;
+    }
+    100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0.6;
+    }
+}
+
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ============================================
+   INFO SECTION — 映像素材お持ち込み
+   ============================================ */
+.info-list {
+    list-style-type: none;
+    margin-left: 0;
+    margin-top: 1.5rem;
+    color: var(--text-primary);
+    line-height: 2.2;
+    font-size: 1.05rem;
+}
+
+.info-list li {
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.info-list li::before {
+    content: '―';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+}
+
+.info-note {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(184, 149, 106, 0.1);
+    padding-top: 1.5rem;
+    line-height: 1.8;
+}
+
+/* ============================================
+   RESPONSIVE REFINEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+    .section {
+        padding: 80px 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 3rem;
+    }
+
+    .concept-content {
+        font-size: 1rem;
+        line-height: 2.2;
+    }
+
+    .color-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .cta-section {
+        padding: 100px 0;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        max-width: 80px;
+    }
+
+    .hero-ornament::before,
+    .hero-ornament::after {
+        width: 40px;
+    }
+}
+
+/* ============================================
+   TEXT UTILITIES
+   ============================================ */
+.text-center {
+    text-align: center;
+}
