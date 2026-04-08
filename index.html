@@ -9,14 +9,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Sticky Navigation -->
     <nav class="site-nav" id="siteNav">
         <a href="#" class="nav-logo"><img src="SLI-BIG-LOGO.png" alt="SLI" class="nav-logo-img"></a>
-        <ul class="nav-links">
-            <li><a href="#concept">Concept</a></li>
-            <li><a href="#full-color-led">Equipment</a></li>
-            <li><a href="#video-materials">DVD Guide</a></li>
-        </ul>
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-menu" id="navMenu">
+            <ul class="nav-links">
+                <li><a href="#concept">Concept</a></li>
+                <li class="nav-dropdown">
+                    <a href="#full-color-led" class="dropdown-toggle">Equipment <span class="arrow"></span></a>
+                    <ul class="dropdown-list">
+                        <li><a href="#full-color-led">FULL COLOR LED MOVING LIGHT</a></li>
+                        <li><a href="#beam-light">BEAM LIGHT</a></li>
+                        <li><a href="#led-caster-light">LED CASTER LIGHT</a></li>
+                        <li><a href="#screen-initial-logo">SCREEN INITIAL LOGO</a></li>
+                        <li><a href="#wing-heart">WING HEART</a></li>
+                    </ul>
+                </li>
+                <li><a href="#video-materials">DVD Guide</a></li>
+            </ul>
+        </div>
     </nav>
 
     <header class="hero">

@@ -22,6 +22,53 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ============================================
+    // MOBILE MENU & DROPDOWN LOGIC
+    // ============================================
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking on a standard link
+        document.querySelectorAll('.nav-links > li > a:not(.dropdown-toggle)').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburgerBtn.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Close menu when clicking items inside dropdown on mobile
+        document.querySelectorAll('.dropdown-list a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 800) {
+                    hamburgerBtn.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    }
+
+    // Mobile Dropdown Toggle
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    const navDropdown = document.querySelector('.nav-dropdown');
+    
+    if (dropdownToggle && navDropdown) {
+        dropdownToggle.addEventListener('click', (e) => {
+            if (window.innerWidth <= 800) {
+                e.preventDefault(); // Prevent jump to #full-color-led
+                navDropdown.classList.toggle('active');
+            }
+        });
+    }
+
+    // ============================================
     // IMAGE DATABASES — Keynote Catalogs
     // ============================================
     const kandanImages = [
