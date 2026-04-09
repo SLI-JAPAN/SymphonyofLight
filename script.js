@@ -189,7 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const imgSrc = e.target.getAttribute('data-highres') || e.target.getAttribute('src');
             const imgAlt = e.target.getAttribute('alt');
             
-            lightboxImage.setAttribute('src', imgSrc);
+            lightboxImage.removeAttribute('src'); // clear previous image
+            setTimeout(() => {
+                lightboxImage.setAttribute('src', imgSrc);
+            }, 10);
+            
             lightboxCaption.textContent = imgAlt || '';
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
