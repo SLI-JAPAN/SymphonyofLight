@@ -189,18 +189,26 @@ document.addEventListener('DOMContentLoaded', () => {
             const imgSrc = e.target.getAttribute('data-highres') || e.target.getAttribute('src');
             const imgAlt = e.target.getAttribute('alt');
 
-            // 直前の画像が一瞬表示されるのを防ぐ：先にsrcを空にしてから新しい画像をセット
+            // Reset lightbox state
             lightboxImage.style.opacity = '0';
             lightboxImage.setAttribute('src', '');
             lightboxCaption.textContent = imgAlt || '';
+            
+            // Show lightbox and start loading animation
             lightbox.classList.add('active');
+            lightbox.classList.add('loading');
             document.body.style.overflow = 'hidden';
 
-            // 新しい画像の読み込みが完了したらフェードイン表示
+            // Load new image
             const newImg = new Image();
             newImg.onload = () => {
                 lightboxImage.setAttribute('src', imgSrc);
                 lightboxImage.style.opacity = '1';
+                lightbox.classList.remove('loading');
+            };
+            newImg.onerror = () => {
+                lightbox.classList.remove('loading');
+                console.error('Failed to load image:', imgSrc);
             };
             newImg.src = imgSrc;
         }
