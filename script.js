@@ -188,15 +188,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.target.tagName === 'IMG' && (e.target.closest('.color-card') || e.target.closest('.lightbox-trigger') || e.target.classList.contains('lightbox-trigger'))) {
             const imgSrc = e.target.getAttribute('data-highres') || e.target.getAttribute('src');
             const imgAlt = e.target.getAttribute('alt');
-            
-            lightboxImage.removeAttribute('src'); // clear previous image
-            setTimeout(() => {
-                lightboxImage.setAttribute('src', imgSrc);
-            }, 10);
-            
+
+            // 直前の画像が一瞬表示されるのを防ぐ：先にsrcを空にしてから新しい画像をセット
+            lightboxImage.style.opacity = '0';
+            lightboxImage.setAttribute('src', '');
             lightboxCaption.textContent = imgAlt || '';
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // 新しい画像の読み込みが完了したらフェードイン表示
+            const newImg = new Image();
+            newImg.onload = () => {
+                lightboxImage.setAttribute('src', imgSrc);
+                lightboxImage.style.opacity = '1';
+            };
+            newImg.src = imgSrc;
         }
     });
 
