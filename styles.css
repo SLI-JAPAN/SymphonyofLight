@@ -928,8 +928,8 @@ body {
 .lightbox img {
     max-width: 95vw;
     max-height: 90vh;
-    /* 小さな画像（Beam Light等）がより大きく見えるよう、制限を緩和 */
-    width: clamp(300px, 95%, 1400px);
+    /* 小さな画像（Beam Light等）も画面いっぱいまで拡大して迫力を出す */
+    width: 95vw;
     height: auto;
     object-fit: contain;
     border-radius: 4px;
