@@ -1135,8 +1135,8 @@ body {
     border-left: 2px solid var(--accent-gold);
     padding: 1rem 1.2rem;
     margin: 1.2rem 0;
-    font-family: var(--font-heading-alt);
-    letter-spacing: 0.05em;
+    font-family: var(--font-body); /* Body font for better legibility */
+    letter-spacing: 0.03em;
     color: var(--accent-gold-light);
     font-size: 0.95rem;
     line-height: 1.6;
@@ -1145,9 +1145,10 @@ body {
 .spec-label {
     font-size: 0.75rem;
     color: var(--text-secondary);
-    text-transform: uppercase;
+    text-transform: none; /* Removed uppercase */
     display: block;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.1em;
 }
 
 .info-note {
