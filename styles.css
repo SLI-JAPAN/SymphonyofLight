@@ -1090,40 +1090,75 @@ body {
 /* ============================================
    INFO SECTION — 映像素材お持ち込み
    ============================================ */
-.info-list {
-    list-style-type: none;
-    margin: 2rem auto 0;
-    color: var(--text-primary);
-    line-height: 2.2;
-    font-size: 1.05rem;
-    text-align: center; /* Center for mobile-first/editorial look */
-    max-width: 800px;
+/* DVD Guide Grid & Cards */
+.dvd-guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
 }
 
-.info-list li {
-    padding: 1.8rem 0;
-    border-top: 1px solid rgba(184, 149, 106, 0.12);
+.dvd-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(184, 149, 106, 0.15);
+    padding: 2rem;
+    border-radius: 8px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.info-list li:first-child {
-    border-top: none;
+.dvd-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-5px);
 }
 
-.info-list li strong {
-    display: block;
-    margin-bottom: 0.5rem;
+.dvd-card-title {
     color: var(--accent-gold-light);
     font-family: var(--font-heading-alt);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    line-height: 1.4;
+}
+
+.dvd-card-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    flex-grow: 1;
+}
+
+.spec-box {
+    background: rgba(184, 149, 106, 0.08);
+    border-left: 2px solid var(--accent-gold);
+    padding: 1rem 1.2rem;
+    margin: 1.2rem 0;
+    font-family: var(--font-heading-alt);
+    letter-spacing: 0.05em;
+    color: var(--accent-gold-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.spec-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.2rem;
 }
 
 .info-note {
-    margin-top: 2.5rem;
-    font-size: 0.9rem;
+    margin-top: 3rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
-    border-top: 1px solid rgba(184, 149, 106, 0.1);
-    padding-top: 1.5rem;
-    line-height: 1.8;
+    text-align: center;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.8;
 }
 
 /* ============================================
