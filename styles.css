@@ -118,6 +118,26 @@ body {
     width: 100%;
 }
 
+.nav-apply-btn {
+    border: 1px solid var(--accent-gold);
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    color: var(--accent-gold) !important;
+    transition: all 0.3s ease !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.8rem !important;
+    letter-spacing: 0.1em !important;
+}
+
+.nav-apply-btn::after {
+    display: none;
+}
+
+.nav-apply-btn:hover {
+    background: rgba(184, 149, 106, 0.1);
+    color: var(--accent-gold-light) !important;
+}
+
 /* Dropdown Styles */
 .nav-dropdown {
     position: relative;
@@ -1197,6 +1217,217 @@ body {
     .hero-ornament::before,
     .hero-ornament::after {
         width: 40px;
+    }
+}
+
+/* ============================================
+   FLOATING ACTION BUTTON (FAB)
+   ============================================ */
+.fab-container {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.fab-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(10,10,10,0.9), rgba(20,20,20,0.95));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--accent-gold);
+    padding: 1.2rem 3rem;
+    border-radius: 50px;
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(184, 149, 106, 0.2);
+    border: 1px solid rgba(184, 149, 106, 0.4);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.fab-button::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px solid rgba(184, 149, 106, 0.4);
+    border-radius: 50px;
+    pointer-events: none;
+    transition: all 0.4s ease;
+}
+
+.fab-diamond {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-gold);
+    transform: rotate(45deg);
+    margin: 0 0.5rem;
+    transition: background 0.4s ease;
+}
+
+.fab-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.fab-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8), 0 0 25px rgba(184, 149, 106, 0.4);
+    background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+    color: var(--bg-color);
+    border-color: var(--accent-gold);
+}
+
+.fab-button:hover::before {
+    border-color: rgba(255, 255, 255, 0.5);
+    inset: 3px;
+}
+
+.fab-button:hover .fab-diamond {
+    background: var(--bg-color);
+}
+
+@media (max-width: 800px) {
+    .fab-container {
+        bottom: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        padding: 0;
+        background: rgba(10, 10, 10, 0.95);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-top: 1px solid rgba(184, 149, 106, 0.2);
+        animation: slideUp 0.5s ease-out forwards;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(100%); }
+        to { transform: translateY(0); }
+    }
+
+    .fab-button {
+        width: 100%;
+        border-radius: 0;
+        padding: 1.2rem;
+        font-size: 0.95rem;
+        border: none;
+        box-shadow: none;
+        background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+        color: var(--bg-color);
+        font-weight: 500;
+    }
+
+    .fab-button:hover {
+        transform: none;
+        background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+        color: var(--bg-color);
+    }
+
+    /* Adjust footer to not be hidden by fixed mobile bar */
+    .footer {
+        padding-bottom: 90px;
+    }
+}
+
+/* ============================================
+   APPLICATION INVITATION (BOTTOM CTA)
+   ============================================ */
+.application-invitation {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 12px; /* Gap between outer and inner border */
+    background: rgba(5, 5, 5, 0.6);
+    border: 1px solid var(--accent-gold-dark);
+    position: relative;
+}
+
+.invitation-inner {
+    padding: 4.5rem 2.5rem;
+    background: rgba(10, 10, 10, 0.9); /* Solid elegant dark */
+    border: 1px solid rgba(184, 149, 106, 0.4);
+    text-align: center;
+    position: relative;
+}
+
+.invitation-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #0a0a0a;
+    border: 1px solid var(--accent-gold-dark);
+    z-index: 2;
+    transform: rotate(45deg);
+}
+
+.invitation-corner.tl { top: -7px; left: -7px; }
+.invitation-corner.tr { top: -7px; right: -7px; }
+.invitation-corner.bl { bottom: -7px; left: -7px; }
+.invitation-corner.br { bottom: -7px; right: -7px; }
+
+.invitation-title {
+    font-family: var(--font-heading);
+    color: var(--accent-gold);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.invitation-text {
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    line-height: 2;
+    letter-spacing: 0.08em;
+    margin-bottom: 3rem;
+}
+
+.invitation-btn {
+    display: inline-block;
+    padding: 1.1rem 3rem;
+    background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
+    color: var(--bg-color);
+    font-size: 0.95rem;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-weight: 500;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.invitation-btn:hover {
+    background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 15px rgba(184, 149, 106, 0.3);
+}
+
+@media (max-width: 800px) {
+    .application-invitation {
+        margin: 0 1rem;
+        padding: 5px;
+    }
+    .invitation-inner {
+        padding: 2.5rem 1.5rem;
+    }
+    .invitation-text {
+        font-size: 0.9rem;
+    }
+    .invitation-btn {
+        width: 100%;
+        padding: 1rem 1.5rem;
     }
 }
 
