@@ -1300,39 +1300,49 @@ body {
 
 @media (max-width: 800px) {
     .fab-container {
-        bottom: 0;
+        bottom: 25px;
         right: 0;
         left: 0;
         width: 100%;
+        display: flex;
+        justify-content: center;
         padding: 0;
-        background: rgba(10, 10, 10, 0.95);
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        border-top: 1px solid rgba(184, 149, 106, 0.2);
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border-top: none;
         animation: slideUp 0.5s ease-out forwards;
     }
 
     @keyframes slideUp {
-        from { transform: translateY(100%); }
+        from { transform: translateY(150%); }
         to { transform: translateY(0); }
     }
 
     .fab-button {
-        width: 100%;
-        border-radius: 0;
-        padding: 1.2rem;
+        width: 90%;
+        max-width: 320px;
+        border-radius: 50px;
+        padding: 1rem 1.5rem;
         font-size: 0.95rem;
-        border: none;
-        box-shadow: none;
-        background: linear-gradient(135deg, var(--accent-gold-dark), var(--accent-gold));
-        color: var(--bg-color);
-        font-weight: 500;
+        background: rgba(10, 10, 10, 0.85);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(184, 149, 106, 0.5);
+        color: var(--accent-gold);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+        font-weight: 400;
+    }
+
+    .fab-button::before {
+        inset: 4px;
+        border-color: rgba(184, 149, 106, 0.3);
     }
 
     .fab-button:hover {
-        transform: none;
-        background: linear-gradient(135deg, var(--accent-gold), var(--accent-gold-light));
-        color: var(--bg-color);
+        transform: translateY(-2px);
+        background: rgba(20, 20, 20, 0.95);
+        color: var(--accent-gold-light);
     }
 
     /* Adjust footer to not be hidden by fixed mobile bar */
