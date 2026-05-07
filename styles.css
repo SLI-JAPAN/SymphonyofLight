@@ -1306,6 +1306,7 @@ body {
         width: 100%;
         display: flex;
         justify-content: center;
+        align-items: center;
         padding: 0;
         background: transparent;
         backdrop-filter: none;
